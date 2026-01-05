@@ -1,0 +1,5 @@
+title: siunitx (HTML)
+version: 0.1.0
+contributes:
+  filters:
+    - siunitx.lua
