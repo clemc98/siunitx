@@ -16,16 +16,16 @@ siunitx:
   multi-part-units: single
 ---
 
-Inline example: $\SI{9.81}{\meter\per\second\squared}$
+Inline example: $\qty{9.81}{\meter\per\second\squared}$
 
 Plain unit: $\si{\kilo\gram\per\meter\cubed}$
 
 Number formatting: $\num{1.23}$ and $\numrange{1.5}{2.5}$
 
-List: $\SIlist{1; 2; 3}{\newton}$
+List: $\qtylist{1; 2; 3}{\newton}$
 
-Range: $\SIrange{3}{5}{\milli\meter}$
+Range: $\qtyrange{3}{5}{\milli\meter}$
 
 Angle: $\ang{30;15;20}$
 
-Math still works: $E = m c^2$ with $m = \SI{2}{\kilogram}$.
+Math still works: $E = m c^2$ with $m = \qty{2}{\kilogram}$.

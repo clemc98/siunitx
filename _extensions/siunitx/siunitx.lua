@@ -13,6 +13,9 @@ local opts = {
 }
 
 local macro_list = {
+  {name = "qtyrange", args = 3},
+  {name = "qtylist", args = 2},
+  {name = "qty", args = 2},
   {name = "SIrange", args = 3},
   {name = "SIlist", args = 2},
   {name = "numrange", args = 2},
@@ -21,6 +24,12 @@ local macro_list = {
   {name = "si", args = 1},
   {name = "num", args = 1},
   {name = "ang", args = 1},
+}
+
+local macro_aliases = {
+  qty = "SI",
+  qtyrange = "SIrange",
+  qtylist = "SIlist",
 }
 
 local default_separators = {
@@ -571,6 +580,7 @@ local function format_angle(value)
 end
 
 local function render_macro_html(name, args)
+  name = macro_aliases[name] or name
   if name == "num" then
     local number = format_number(args[1])
     return "<span class=\"siunitx siunitx-number\">" .. escape_html(number) .. "</span>"
@@ -613,6 +623,7 @@ local function render_macro_html(name, args)
 end
 
 local function render_macro_math(name, args)
+  name = macro_aliases[name] or name
   local function math_text(text)
     return "\\mathrm{" .. text .. "}"
   end

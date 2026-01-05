@@ -26,16 +26,18 @@ format:
 
 ## Supported macros
 
-- `\SI{num}{unit}`
+- `\qty{num}{unit}`
 - `\si{unit}`
 - `\num{num}`
-- `\SIrange{a}{b}{unit}`
+- `\qtyrange{a}{b}{unit}`
 - `\numrange{a}{b}`
-- `\SIlist{a; b; c}{unit}`
+- `\qtylist{a; b; c}{unit}`
 - `\numlist{a; b; c}`
 - `\ang{d; m; s}` (simple degrees/minutes/seconds)
 
 Common SI units and prefixes are mapped (for example `\kilo\meter`, `\newton`). Unknown unit commands are rendered without the leading backslash.
+
+Legacy `\SI`, `\SIrange`, and `\SIlist` are also accepted.
 
 ## Options
 
