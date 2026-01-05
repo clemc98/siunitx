@@ -8,10 +8,10 @@ siunitx:
   per-mode: symbol
   inter-unit-product: '\ensuremath{{}\cdot{}}'
   range-units: single
-  range-phrase: '\text{ et }'
+  range-phrase: '\text{ to }'
   print-unity-mantissa: false
   list-units: single
-  list-final-separator: '\text{ et }'
+  list-final-separator: '\text{ to }'
   separate-uncertainty: true
   multi-part-units: single
 ---
@@ -29,5 +29,3 @@ Range: $\SIrange{3}{5}{\milli\meter}$
 Angle: $\ang{30;15;20}$
 
 Math still works: $E = m c^2$ with $m = \SI{2}{\kilogram}$.
-
-En français, entre $\SIrange{3}{5}{\milli\meter}$.

@@ -23,10 +23,6 @@ local macro_list = {
   {name = "ang", args = 1},
 }
 
-table.sort(macro_list, function(a, b)
-  return #a.name > #b.name
-end)
-
 local default_separators = {
   range_separator = " to ",
   list_separator = ", ",
@@ -138,7 +134,7 @@ local function inlines_to_string(inlines)
     elseif t == "Span" then
       table.insert(parts, inlines_to_string(inline.content))
     else
-      table.insert(parts, pandoc.utils.stringify(inline))
+      table.insert(parts, stringify(inline))
     end
   end
   return table.concat(parts)
@@ -161,7 +157,7 @@ local function meta_to_string(value)
   if t == "MetaBool" then
     return value and "true" or "false"
   end
-  return pandoc.utils.stringify(value)
+  return stringify(value)
 end
 
 local function get_cfg(cfg, key, default)
@@ -701,7 +697,7 @@ local function handle_str(el)
   return inlines
 end
 
-local function handle_raw_inline(el)
+local function handle_raw(el, is_block)
   if not is_html_format() then
     return nil
   end
@@ -716,28 +712,10 @@ local function handle_raw_inline(el)
   if #segments == 1 and segments[1].type == "macro" then
     local html = render_macro_html(segments[1].name, segments[1].args)
     if html then
+      if is_block then
+        return pandoc.RawBlock("html", html)
+      end
       return pandoc.RawInline("html", html)
-    end
-  end
-  return nil
-end
-
-local function handle_raw_block(el)
-  if not is_html_format() then
-    return nil
-  end
-  if el.format ~= "tex" and el.format ~= "latex" then
-    return nil
-  end
-  local trimmed = trim(el.text)
-  local segments, changed = parse_segments(trimmed)
-  if not changed then
-    return nil
-  end
-  if #segments == 1 and segments[1].type == "macro" then
-    local html = render_macro_html(segments[1].name, segments[1].args)
-    if html then
-      return pandoc.RawBlock("html", html)
     end
   end
   return nil
@@ -779,8 +757,12 @@ function Pandoc(doc)
   end
   return doc:walk({
     Str = handle_str,
-    RawInline = handle_raw_inline,
-    RawBlock = handle_raw_block,
+    RawInline = function(el)
+      return handle_raw(el, false)
+    end,
+    RawBlock = function(el)
+      return handle_raw(el, true)
+    end,
     Math = handle_math,
   })
 end
