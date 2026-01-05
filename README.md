@@ -27,6 +27,7 @@ format:
 ## Supported macros
 
 - `\qty{num}{unit}`
+- `\unit{unit}`
 - `\si{unit}`
 - `\num{num}`
 - `\qtyrange{a}{b}{unit}`

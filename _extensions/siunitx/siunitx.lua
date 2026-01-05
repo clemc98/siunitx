@@ -16,6 +16,7 @@ local macro_list = {
   {name = "qtyrange", args = 3},
   {name = "qtylist", args = 2},
   {name = "qty", args = 2},
+  {name = "unit", args = 1},
   {name = "SIrange", args = 3},
   {name = "SIlist", args = 2},
   {name = "numrange", args = 2},
@@ -30,6 +31,7 @@ local macro_aliases = {
   qty = "SI",
   qtyrange = "SIrange",
   qtylist = "SIlist",
+  unit = "si",
 }
 
 local default_separators = {
